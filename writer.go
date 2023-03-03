@@ -14,6 +14,6 @@ func (w *Writer) Write(p []byte) (int, error) {
 	if err != nil {
 		fmt.Printf("io.Writer.Write error: %s\n", err)
 	}
-	fmt.Printf("io.Writer.Write error: %s\n", p)
+	fmt.Printf("io.Writer.Write: %s\n", p)
 	return n, err
 }

@@ -14,7 +14,7 @@ func (wc *WriteCloser) Write(p []byte) (int, error) {
 	if err != nil {
 		fmt.Printf("io.WriteCloser.Write error: %s\n", err)
 	}
-	fmt.Printf("io.WriteCloser.Write error: %s\n", p)
+	fmt.Printf("io.WriteCloser.Write: %s\n", p)
 	return n, err
 }
 
