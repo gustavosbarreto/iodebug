@@ -15,6 +15,7 @@ go get github.com/gustavosbarreto/iodebug
 The iodebug package offers following types of wrappers:
 
 * `Reader` for `io.Reader`
+* `Writer` for `io.Writer`
 * `WriteCloser` for `io.WriteCloser`
 
 ### Using Reader
@@ -57,6 +58,46 @@ func main() {
 ```
 
 In the example above, the object f is opened using the os.Open function and passed as a parameter to the Reader wrapper. The wrapper is then used in the read operation with the Read function, which returns the bytes read and a possible error.
+
+### Using Writer
+
+The Writer wrapper is used to monitor write operations. To use it, you need to create an object of type Writer, passing the object you want to monitor as a parameter:
+
+```go
+package main
+
+import (
+	"fmt"
+	"os"
+
+	"github.com/gustavosbarreto/iodebug"
+)
+
+func main() {
+	f, err := os.Create("output.txt")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	w := iodebug.Writer{Writer: f}
+
+	msg := "Hello, world!"
+	_, err = fmt.Fprint(w, msg)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	err = w.Close()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+}
+```
+
+In the example above, the object f is created using the os.Create function and passed as a parameter to the Writer wrapper. The wrapper is then used in the write operation with the Fprint function from the fmt package, which receives the bytes to be written.
 
 ### Using WriteCloser
 
